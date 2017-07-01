@@ -88,7 +88,7 @@ router.put('/:id', (req, res) => {  //p002
     return res.status(400).json({message: message});
   }
   const toUpdate = {};
-  const updateableFields = ['dIsType', 'longName', 'shortName', 'moreInfo'];
+  const updateableFields = ['name', 'active', 'age'];
   updateableFields.forEach(field => {
     if(field in req.body) {
       toUpdate[field] = req.body[field];

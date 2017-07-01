@@ -52,9 +52,9 @@
             success: (item) => {
               $('#showOne').empty();
               $('#showOne').append(`
-                <input type='text' class='name e' value="${item.persons.name}" />
-                <input type='text' class='active e' value="${item.persons.active}" />
-                <input type='text' class='age e' value="${item.persons.age}" />
+                <input id='thename' type='text' class='name e' value='${item.persons.name}' />
+                <input id='isactive' type='text' class='active e' value='${item.persons.active}' />
+                <input id='theage' type='text' class='age e' value='${item.persons.age}' />
                 <div class='buttonwrap'>
                   <button data-id="${item.persons.id}" class="save">Save</button>
                   <button class="cancel">Cancel</button>
@@ -75,7 +75,34 @@
       $('#showOne').on('click', '.save', function(e) {
         e.preventDefault();
         let id = $(this).data('id');
-        console.log(id);
+        var body = {
+          active: $('#isactive').val(),
+          age: $('#theage').val(),
+          id: id,
+          name: $('#thename').val()
+        };
+        let promise = new Promise((res, rej) => {
+          $.ajax({
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(body),
+            headers: {
+              "accept": "application/json; odata=verbose"
+            },
+            type: 'PUT',
+            url: `${app.baseUrl}/persons/${id}`,
+            success: (data) => {
+              $('#showOne').empty().removeClass('active');
+              $('#showAll').empty();
+              app.getAll();
+              res();
+            },
+            error: (error) => {
+              console.log(error);
+              rej();
+            }
+          });
+        });
+        return promise;
       });
     }
   };
