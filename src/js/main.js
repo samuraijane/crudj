@@ -3,9 +3,11 @@
   var app = {
     baseUrl: 'http://localhost:3001',
     init: function() {
-      app.getStuff();
+      app.getAll();
+      app.getOne();
+      app.putOne();
     },
-    getStuff: function() {
+    getAll: () => {
       let promise = new Promise((res, rej) => {
         $.ajax({
           headers: {
@@ -16,12 +18,12 @@
           success: function(items) {
             items.persons.forEach((item) => {
               $('#showAll').append(`
-                <li>
-                  <div>${item.name}</div>
-                  <div>${item.active}</div>
-                  <div>${item.age}</div>
-                  <button>Delete</button>
-                  <button>Edit</button>
+                <li class='listitem'>
+                  <div class='name'>${item.name}</div>
+                  <div class='active'>${item.active}</div>
+                  <div class='age'>${item.age}</div>
+                  <button data-id="${item.id}" class="delete">Delete</button>
+                  <button data-id="${item.id}"class="edit">Edit</button>
                 </li>
               `);
             });
@@ -34,6 +36,47 @@
         });
       });
       return promise;
+    },
+    getOne: () => {
+      $('#showAll').on('click', '.edit', function(e) {
+        e.preventDefault();
+        $('#showOne').addClass('active');
+        let id = $(this).data('id');
+        let promise = new Promise((res, rej) => {
+          $.ajax({
+            headers: {
+              "accept": "application/json; odata=verbose"
+            },
+            type: 'GET',
+            url: `${app.baseUrl}/persons/${id}`,
+            success: (item) => {
+              $('#showOne').empty();
+              $('#showOne').append(`
+                <input type='text' class='name e' value="${item.persons.name}" />
+                <input type='text' class='active e' value="${item.persons.active}" />
+                <input type='text' class='age e' value="${item.persons.age}" />
+                <div class='buttonwrap'>
+                  <button data-id="${item.persons.id}" class="save">Save</button>
+                  <button class="cancel">Cancel</button>
+                </div>
+              `)
+              res();
+            },
+            error: (error) => {
+              console.log(error);
+              rej();
+            }
+          });
+        });
+        return promise;
+      });
+    },
+    putOne: () => {
+      $('#showOne').on('click', '.save', function(e) {
+        e.preventDefault();
+        let id = $(this).data('id');
+        console.log(id);
+      });
     }
   };
 

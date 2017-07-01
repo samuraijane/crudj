@@ -258,3 +258,89 @@ body {
 html {
   color: #4a4a4a;
   font-size: 14px; }
+
+::-moz-selection {
+  background: thistle; }
+
+::selection {
+  background: thistle; }
+
+.y-wrap {
+  margin: 0 auto;
+  width: 90%; }
+
+.listitems,
+.individual {
+  border: 1px solid lightgray;
+  display: inline-block;
+  margin: 30px 10% 0 0;
+  max-width: 600px;
+  padding: 18px;
+  vertical-align: top;
+  width: 50%; }
+
+.listitem div {
+  display: inline-block;
+  margin: 8px 0; }
+  .listitem div.h {
+    font-size: 0.875rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-transform: uppercase; }
+
+.individual input {
+  border: none;
+  background: #f5f5f5;
+  display: block;
+  margin: 6px 0;
+  outline: none;
+  padding: 8px 14px;
+  width: 100%; }
+
+.listitem button,
+.individual button {
+  background: #007db8;
+  border: none;
+  color: white;
+  font-size: 0.775rem;
+  font-weight: 700;
+  margin: 0 4px;
+  outline: none;
+  padding: 4px 12px;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -ms-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease; }
+  .listitem button:hover,
+  .individual button:hover {
+    background: crimson; }
+
+.buttonwrap {
+  margin: 26px 0 8px;
+  text-align: center; }
+
+.individual button {
+  font-size: 1.0rem;
+  min-width: 80px; }
+
+.name {
+  width: 30%; }
+
+.active {
+  width: 16%; }
+
+.age {
+  width: 12%; }
+
+.individual {
+  border: none;
+  margin-right: 0;
+  width: 28%;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -ms-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease; }
+  .individual.active {
+    border: 1px solid lightgray; }

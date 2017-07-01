@@ -13,3 +13,13 @@ html {
   color: $black80;
   font-size: 14px;
 }
+
+
+
+::-moz-selection {
+  background: thistle;
+}
+
+::selection {
+  background: thistle;
+}
