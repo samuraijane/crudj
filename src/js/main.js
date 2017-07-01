@@ -16,6 +16,13 @@
           type: 'GET',
           url: `${app.baseUrl}/persons`,
           success: function(items) {
+            $('#showAll').append(`
+              <li class="listitem">
+                <div class="name h">Name</div>
+                <div class="active h">Active</div>
+                <div class="age h">Age</div>
+              </li>
+            `);
             items.persons.forEach((item) => {
               $('#showAll').append(`
                 <li class='listitem'>
