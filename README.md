@@ -7,4 +7,4 @@ CRUD for jQuery is a simple application for students to learning how to create, 
 + Create a local database in MongoDB with `mongoimport --db crudj --collection persons --drop --file ~/yourpathto/seed-data.json`. You can find this file in the folder entitled *mock-data*.
 + Start the server for the database with `mongod`.
 + In a separate terminal window, run `gulp watch` to start the node server.
-+ Navigate to *http://localhost:3001* in a browser to begin using this application.
++ Navigate to *localhost:3001* in a browser to begin using this application.

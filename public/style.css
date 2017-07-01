@@ -288,6 +288,9 @@ html {
   vertical-align: top;
   width: 50%; }
 
+.listitems {
+  min-height: 211px; }
+
 .listitem div {
   display: inline-block;
   margin: 8px 0; }
@@ -307,7 +310,8 @@ html {
   width: 100%; }
 
 .listitem button,
-.individual button {
+.individual button,
+.createone button {
   background: #007db8;
   border: none;
   color: white;
@@ -322,7 +326,8 @@ html {
   -o-transition: all 0.4s ease;
   transition: all 0.4s ease; }
   .listitem button:hover,
-  .individual button:hover {
+  .individual button:hover,
+  .createone button:hover {
     background: crimson; }
 
 .buttonwrap {
@@ -353,3 +358,6 @@ html {
   transition: all 0.4s ease; }
   .individual.active {
     border: 1px solid lightgray; }
+
+.createone {
+  margin-top: 30px; }

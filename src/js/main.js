@@ -3,9 +3,30 @@
   var app = {
     baseUrl: 'http://localhost:3001',
     init: function() {
+      app.cancel();
+      app.createOne();
+      app.deleteOne();
       app.getAll();
       app.getOne();
       app.putOne();
+    },
+    cancel: () => {
+      $('#showOne').on('click', '.cancel', (e) => {
+        e.preventDefault();
+        $('#showOne').empty().removeClass('active');
+      });
+    },
+    createOne: () => {
+      $('#create').on('click', (e) => {
+        e.preventDefault();
+        alert('This functionality coming soon.');
+      });
+    },
+    deleteOne: () => {
+      $('#showAll').on('click', '.delete', (e) => {
+        e.preventDefault();
+        alert('This functionality coming soon.');
+      });
     },
     getAll: () => {
       let promise = new Promise((res, rej) => {
