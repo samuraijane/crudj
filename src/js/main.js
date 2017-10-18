@@ -3,23 +3,46 @@
   var app = {
     baseUrl: 'http://localhost:3001',
     init: function() {
-      app.cancel();
       app.createOne();
       app.deleteOne();
-      app.getAll();
+      app.doCancel();
+      app.getAllRecords();
       app.getOne();
+      app.openCreate();
       app.putOne();
     },
     cancel: () => {
-      $('#showOne').on('click', '.cancel', (e) => {
-        e.preventDefault();
-        $('#showOne').empty().removeClass('active');
-      });
+      $('#showOne').empty().removeClass('active');
     },
     createOne: () => {
-      $('#create').on('click', (e) => {
+      $('#showOne').on('click', '.create', (e) => {
         e.preventDefault();
-        alert('This functionality coming soon.');
+        var body = {
+          active: $('#isactive').val(),
+          age: $('#theage').val(),
+          name: $('#thename').val()
+        };
+        let promise = new Promise((res, rej) => {
+          $.ajax({
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(body),
+            headers: {
+              "accept": "application/json; odata=verbose"
+            },
+            type: 'POST',
+            url: `${app.baseUrl}/persons`,
+            success: (data) => {
+              app.getAllRecords();
+              app.cancel();
+              res();
+            },
+            error: (error) => {
+              console.log(error);
+              rej();
+            }
+          });
+        });
+        return promise;
       });
     },
     deleteOne: () => {
@@ -28,7 +51,13 @@
         alert('This functionality coming soon.');
       });
     },
-    getAll: () => {
+    doCancel: () => {
+      $('#showOne').on('click', '.cancel', (e) => {
+        e.preventDefault();
+        app.cancel();
+      });
+    },
+    getAllRecords: () => {
       let promise = new Promise((res, rej) => {
         $.ajax({
           headers: {
@@ -37,6 +66,7 @@
           type: 'GET',
           url: `${app.baseUrl}/persons`,
           success: function(items) {
+            $('#showAll').empty();
             $('#showAll').append(`
               <li class="listitem">
                 <div class="name h">Name</div>
@@ -97,6 +127,21 @@
           });
         });
         return promise;
+      });
+    },
+    openCreate: () => {
+      $('#open-create').on('click', (e) => {
+        e.preventDefault();
+        $('#showOne').empty();
+        $('#showOne').append(`
+          <input id='thename' type='text' class='name e' placeholder='Name' />
+          <input id='isactive' type='text' class='active e' placeholder='Active' />
+          <input id='theage' type='text' class='age e' placeholder='Age' />
+          <div class='buttonwrap'>
+            <button data-id="tbd" class="create">Save</button>
+            <button class="cancel">Cancel</button>
+          </div>
+        `);
       });
     },
     putOne: () => {

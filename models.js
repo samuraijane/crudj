@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const personSchema = mongoose.Schema({
-  name: {type: String},  // e.g. account, personal, or tax
+  name: {type: String},
   active: {type: Boolean},
   age: {type: Number}
 });

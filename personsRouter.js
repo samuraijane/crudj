@@ -56,7 +56,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const requiredFields = ['dIsType', 'longName', 'shortName'];
+  const requiredFields = ['name', 'active', 'age'];
   for(let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if(!(field in req.body)) {
@@ -67,10 +67,9 @@ router.post('/', (req, res) => {
   }
   Person
     .create({
-      dIsType: req.body.dIsType,
-      shortName: req.body.shortName,
-      longName: req.body.longName,
-      moreInfo: req.body.moreInfo
+      name: req.body.name,
+      active: req.body.active,
+      age: req.body.age
     })
     .then(
       person => res.status(201).json(person.apiRepr())
