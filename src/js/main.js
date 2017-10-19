@@ -48,7 +48,28 @@
     deleteOne: () => {
       $('#showAll').on('click', '.delete', (e) => {
         e.preventDefault();
-        alert('This functionality coming soon.');
+        let _id = $(e.target).data('id');
+        let promise = new Promise((res, rej) => {
+          $.ajax({
+            contentType: "application/json; charset=utf-8",
+            data: {},
+            headers: {
+              "accept": "application/json; odata=verbose"
+            },
+            type: 'DELETE',
+            url: `${app.baseUrl}/persons/${_id}`,
+            success: (data) => {
+              app.getAllRecords();
+              app.cancel();
+              res();
+            },
+            error: (error) => {
+              console.log(error);
+              rej();
+            }
+          });
+        });
+        return promise;
       });
     },
     doCancel: () => {
