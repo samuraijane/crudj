@@ -187,7 +187,7 @@
             success: (data) => {
               $('#showOne').empty().removeClass('active');
               $('#showAll').empty();
-              app.getAll();
+              app.getAllRecords();
               res();
             },
             error: (error) => {
