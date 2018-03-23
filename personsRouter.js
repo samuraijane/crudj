@@ -45,9 +45,7 @@ router.get('/:id', (req, res) => {
     .findById(req.params.id)
     .exec()
     .then( person => {
-      res.json({
-        persons: person.apiRepr()
-      })
+      res.json(person.apiRepr())
     })
     .catch(err => {
       console.log(err);
@@ -95,6 +93,25 @@ router.put('/:id', (req, res) => {  //p002
   });
   Person
     .findByIdAndUpdate(req.params.id, {$set: toUpdate})
+    .exec()
+    .then( person => res.json(204).end() )
+    .catch(err => {
+      console.error(err);
+      return res.status(500).json({message: 'Internal server error'})
+    });
+});
+
+router.patch('/:id', (req, res) => {  //p002
+  console.log('REQ.PARAMS', req.params.id);
+  console.log('REQ.BODY', req.body.id);
+  if(req.params.id !== req.body.id) {
+    const message = `The request path (${req.params.id}) and the request body id (${req.body.id}) must match.`;
+    console.error(message);
+    return res.status(400).json({message: message});
+  }
+  const fieldToUpdate = req.body;
+  Person
+    .findByIdAndUpdate(req.params.id, {$set: fieldToUpdate})
     .exec()
     .then( person => res.json(204).end() )
     .catch(err => {
