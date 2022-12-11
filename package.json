@@ -19,7 +19,7 @@
   "homepage": "https://github.com/samuraijane/dCode#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
-    "express": "^4.15.3",
+    "express": "^4.17.3",
     "jquery": "^3.2.1",
     "mongoose": "^4.10.6",
     "morgan": "^1.8.2"
